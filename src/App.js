@@ -37,7 +37,6 @@ class App extends React.Component {
     this.unsubscribeFromAuth();
   }
   render() {
-    console.log(this.state);
     return (
       <div>
         <Header currentUser={this.state.currentUser} />
