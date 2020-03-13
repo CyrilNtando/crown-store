@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CustomButton from '../../components/custom-button/custom-button.component';
 import { addItem } from '../../redux/actions/cart.actions';
+import notAvailable from '../../assets/image_not_availble.png';
 import './collection-item.styles.scss';
 
 const CollectionItem = ({ item, addItem }) => {

@@ -12,7 +12,7 @@ const config = {
   appId: '1:406095453146:web:39e3652bab0bae5821bee3',
   measurementId: 'G-NVZDWF00D0'
 };
-
+firebase.initializeApp(config);
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
@@ -36,8 +36,41 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
   return userRef;
 };
-firebase.initializeApp(config);
 
+//create a collection of document into database
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = firestore1.collection(collectionKey);
+  //batch allows us to group all call together into one big request
+  const batch = firestore1.batch();
+
+  objectsToAdd.forEach(obj => {
+    //make a new ref object or  document
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, obj);
+  });
+  //execute batch file
+  return await batch.commit();
+};
+
+export const convertCollectionsSnapshotToMap = collections => {
+  const transformedCollection = collections.docs.map(doc => {
+    const { title, items } = doc.data();
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items
+    };
+  });
+
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {});
+};
 export const auth = firebase.auth();
 export const firestore1 = firebase.firestore();
 
