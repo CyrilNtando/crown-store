@@ -28,4 +28,5 @@ export const OptionsContainer = styled.div`
 
 export const OptionLink = styled(Link)`
   ${OptionsContainerStyles}
+  cursor: pointer;
 `;

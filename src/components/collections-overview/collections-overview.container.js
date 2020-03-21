@@ -6,7 +6,6 @@ import { selectIsCollectionFetching } from '../../redux/selectors/shop.selectors
 
 import WithSpinner from '../with-spinner/with-spinner.component';
 import CollectionOverview from '../collections-overview/collections-overview.component';
-import collectionComponent from '../../pages/collection/collection.component';
 
 const mapStateToProps = createStructuredSelector({
   isLoading: selectIsCollectionFetching
